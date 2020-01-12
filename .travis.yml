@@ -17,7 +17,7 @@ before_script:
   - npm test
 
 script:
-  - docker build "$IMAGE_NAME" .
+  - docker build -t "$IMAGE_NAME" .
   - docker tag "$IMAGE_NAME" "$IMAGE_NAME:$IMAGE_TAG"
 
 after_script:
