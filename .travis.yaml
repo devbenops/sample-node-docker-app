@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+language: node_js
+node_js:
+  - "node"
+
+install:
+  - npm install
+
+before_script:
+  - npm test
+
+script:
+  - docker build . -t just
