@@ -1,16 +1,17 @@
-# sudo: required
+sudo: required
 
-# services:
-#   - docker
-language: node_js
-node_js:
-  - "node"
+services:
+  - docker
+language: bash
+# language: node_js
+# node_js:
+#   - "node"
 
-# install:
-#   - npm install
+install:
+  - npm install
 
-# before_script:
-#   - npm test
+before_script:
+  - npm test
 
-# script:
-#   - docker build . -t just
+script:
+  - docker build . -t just
