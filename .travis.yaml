@@ -3,7 +3,7 @@ os:
  - linux
 services:
   - docker
-# language: bash
+  
 language: node_js
 node_js:
   - "node"
