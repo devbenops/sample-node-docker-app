@@ -1,5 +1,8 @@
 sudo: required
-
+env:
+  global:
+    - IMAGE_NAME=nithinbenny444/travis-test
+    - IMAGE_TAG="$TRAVIS_BUILD_NUMBER"
 services:
   - docker
 language: bash
@@ -14,4 +17,9 @@ before_script:
   - npm test
 
 script:
-  - docker build . -t just
+  - docker build "$IMAGE_NAME" .
+  - docker tag "$IMAGE_NAME" "$IMAGE_NAME:$IMAGE_TAG"
+
+after_script:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+  - docker push "$IMAGE_NAME:$IMAGE_TAG"
