@@ -23,3 +23,5 @@ script:
 after_script:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker push "$IMAGE_NAME:$IMAGE_TAG"
+  - apt-get install python
+  - echo "The image name is $IMAGE_NAME:$IMAGE_TAG"

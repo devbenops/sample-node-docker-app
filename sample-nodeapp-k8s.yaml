@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-node
+  namespace: dev-test
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    component: sample-node
+    environment: dev
+  type: ClusterIP
+                  
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    component: sample-node
+    environment: dev
+  name: sample-node
+  namespace: dev-test
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      component: sample-node
+      environment: dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        component: sample-node
+        environment: dev
+    spec:
+      containers:
+        image: ${$IMAGE_NAME:$IMAGE_TAG}
+        imagePullPolicy: IfNotPresent
+        name: backoffice
+        ports:
+        - containerPort: 80
+          protocol: TCP
+      imagePullSecrets:
+      - name: docker-cred
+      restartPolicy: Always
+
+
