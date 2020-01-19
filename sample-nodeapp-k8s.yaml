@@ -15,42 +15,29 @@ spec:
   type: ClusterIP
                   
 ---
-
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    component: sample-node
-    environment: dev
-  name: sample-node
+  name: nginx-deployment
   namespace: dev-test
+  labels:
+    app: nginx
 spec:
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      component: sample-node
-      environment: dev
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
+      app: nginx
   template:
     metadata:
       labels:
-        component: sample-node
-        environment: dev
+        app: nginx
     spec:
       containers:
-        image: ${$IMAGE_NAME:$IMAGE_TAG}
-        imagePullPolicy: IfNotPresent
-        name: backoffice
+      - name: nginx
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
         ports:
         - containerPort: 80
-          protocol: TCP
       imagePullSecrets:
       - name: docker-cred
-      restartPolicy: Always
 
 
