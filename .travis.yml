@@ -27,4 +27,4 @@ after_script:
   - sudo az aks install-cli
   - sudo az login --service-principal -u $SVC_PRINCIPAL_ID -p $SVC_PRINCIPAL_PASSWORD --tenant $TENANT_ID
   - sudo az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_CLUSTER --admin
-  - kubectl get nodes
+  - sudo kubectl get nodes
