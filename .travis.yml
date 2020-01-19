@@ -29,3 +29,6 @@ after_script:
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && 
     sudo apt-get update &&
     sudo apt-get install -y kubectl
+  - sudo az login --service-principal -u b7b518ed-9860-4d3e-af5d-d55eccd876aa -p d0e5487d-2dac-4ed0-9425-4a5ff3cb044d --tenant 38a45ae8-5a43-4639-8640-e0104d51d5c2
+  - az aks get-credentials --resource-group LendicoDev1 --name dev1 --admin
+  - kubectl get nodes
