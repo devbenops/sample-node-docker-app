@@ -19,9 +19,13 @@ before_script:
 script:
   - docker build -t "$IMAGE_NAME" .
   - docker tag "$IMAGE_NAME" "$IMAGE_NAME:$IMAGE_TAG"
-
-after_script:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker push "$IMAGE_NAME:$IMAGE_TAG"
-  - sudo apt-get install python
-  - echo "The image name is $IMAGE_NAME:$IMAGE_TAG"
+after_script:
+
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  - sudo apt-get update && sudo apt-get install -y apt-transport-https && \
+    sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && \
+    sudo echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && \
+    sudo apt-get update && \
+    sudo apt-get install -y kubectl
