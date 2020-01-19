@@ -24,11 +24,7 @@ script:
 after_script:
 
   - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-  - sudo apt-get update && sudo apt-get install -y apt-transport-https && 
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && 
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && 
-    sudo apt-get update &&
-    sudo apt-get install -y kubectl
-  - sudo az login --service-principal -u b7b518ed-9860-4d3e-af5d-d55eccd876aa -p d0e5487d-2dac-4ed0-9425-4a5ff3cb044d --tenant 38a45ae8-5a43-4639-8640-e0104d51d5c2
-  - az aks get-credentials --resource-group LendicoDev1 --name dev1 --admin
+  - sudo az aks install-cli
+  - sudo az login --service-principal -u $SVC_PRINCIPAL_ID -p $SVC_PRINCIPAL_PASSWORD --tenant $TENANT_ID
+  - sudo az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_CLUSTER --admin
   - kubectl get nodes
