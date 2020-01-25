@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.7.9
+        image: nithinbenny444/travis-test:0.11
         ports:
         - containerPort: 80
       imagePullSecrets:

@@ -1,9 +1,8 @@
 sudo: required
 env:
   global:
-    - IMAGE_NAME=nginx
-   # - IMAGE_TAG="$TRAVIS_BUILD_NUMBER"
-    - IMAGE_TAG=1.17.8
+    - IMAGE_NAME=nithinbenny444/travis-test
+    - IMAGE_TAG="$TRAVIS_BUILD_NUMBER"
     - MANIFEST_DEPLOYMENT_FILE_NAME="sample-nodeapp-k8s.yaml"
 services:
   - docker
