@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: {{IMAGE_NAME}}":"{{IMAGE_TAG}}
+        image: nginx:1.7.9
         ports:
         - containerPort: 80
       imagePullSecrets:

@@ -3,6 +3,7 @@ env:
   global:
     - IMAGE_NAME=nithinbenny444/travis-test
     - IMAGE_TAG="$TRAVIS_BUILD_NUMBER"
+    - MANIFEST_DEPLOYMENT_FILE_NAME="sample-nodeapp-k8s.yaml"
 services:
   - docker
 language: bash
@@ -28,4 +29,8 @@ after_script:
   - sudo az login --service-principal -u $SVC_PRINCIPAL_ID -p $SVC_PRINCIPAL_PASSWORD --tenant $TENANT_ID
   - sudo az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $AKS_CLUSTER --admin
   - sudo kubectl get nodes
+  - oldTag=$(cat $MANIFEST_DEPLOYMENT_FILE_NAME | grep -P $IMAGE_NAME | awk -F ":" '{print $3}')
+  - oldImage=$IMAG_ENAME:$oldTag
+  - newImage=$IMAGENAME:$IMAGE_TAG
+  - sed -i "s@$oldImage@$newImage@" $MANIFEST_DEPLOYMENT_FILE_NAME
   - sudo kubectl create -f sample-nodeapp-k8s.yaml
