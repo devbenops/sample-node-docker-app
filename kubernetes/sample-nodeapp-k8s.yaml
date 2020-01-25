@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: sample-node
-        image: nithinbenny444/travis-test:0.12
+        image: nithinbenny444/travis-test:0.14
         ports:
         - containerPort: 80
       imagePullSecrets:
