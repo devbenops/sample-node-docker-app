@@ -34,3 +34,5 @@ after_script:
   - newImage=$IMAGENAME:$IMAGE_TAG
   - sed -i "s@$oldImage@$newImage@" $MANIFEST_DEPLOYMENT_FILE_NAME
   - sudo kubectl create -f sample-nodeapp-k8s.yaml
+  - echo $IMAGE_TAG
+  - echo $TRAVIS_BUILD_NUMBER

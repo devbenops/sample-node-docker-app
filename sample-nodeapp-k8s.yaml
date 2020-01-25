@@ -18,23 +18,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: sample-node
   namespace: dev-test
   labels:
-    app: nginx
+    app: sample-node
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: sample-node
   template:
     metadata:
       labels:
-        app: nginx
+        app: sample-node
     spec:
       containers:
-      - name: nginx
-        image: nithinbenny444/travis-test:0.11
+      - name: sample-node
+        image: nithinbenny444/travis-test:0.12
         ports:
         - containerPort: 80
       imagePullSecrets:
